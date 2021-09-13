@@ -29,7 +29,6 @@ from files_manager import views as files_manager_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home_views.home, name='home-menu'),
-    path('about/', home_views.AboutView.as_view(template_name='home_menu/about.html')),
     path('register/', user_views.register, name='register'),
     path('profile/', user_views.profile, name='profile'),
     path('delete_dataset/<sett_id>', user_views.delete_dataset_setting, name='delete-sett'),
