@@ -1,0 +1,47 @@
+{% extends "home_menu/base.html" %}
+{% block extra_css %}
+{{ form1.media.css }}
+{% endblock %}
+
+{% block extra_js %}
+{{ form1.media.js }}
+{% endblock %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<form method="POST">
+    {% csrf_token %}
+    <fieldset class="form-group">
+        <legend class="border-bottom mb-4 all-line">
+            Create dataset!
+        </legend>
+        <div class="row d-flex justify-content-around">
+            <div class="column start-form">
+                <h4>Dataset settings</h4>
+                {{ start_form|crispy }}
+            </div>
+            <div class="column start-form">
+                <h4>Experiment settings</h4>
+                <!-- Age slider-->
+                <p>
+                    <label for="amount">Age range:</label>
+                    <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+                </p>
+
+
+                <div id="slider-range"></div>
+                {{form1|crispy }}
+            </div>
+        </div>
+    </fieldset>
+    <div class="row">
+        <div class="column submit-form">
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Next</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+{% endblock content%}

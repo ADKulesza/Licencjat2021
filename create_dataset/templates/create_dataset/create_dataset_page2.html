@@ -1,0 +1,46 @@
+{% extends "home_menu/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<legend class="border-bottom mb-4">Filters Settings</legend>
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+
+            <form method="POST">
+                {% csrf_token %}
+                <fieldset class="form-group">
+
+                    {{ filter_form|crispy }}
+
+                </fieldset>
+                <div class="form-group">
+                    <button class="btn btn-outline-info" type="submit" value="more" name="filter_submit">Save And Add
+                        More Filters
+                    </button>
+                    <button class="btn btn-outline-info" type="submit" value="enough">Save And Go Next</button>
+                </div>
+            </form>
+            <a href='{% url "confirm_dataset" %}'>Next Without Filters</a>
+
+        </div>
+        <div class="col-sm">
+            <p>Low Frequency and High frequency are the frequencies below which and above which, respectively, to filter out of the
+                data.
+                Thus the uses are: </p>
+            <ul>
+
+                <li>Low Frequency < High frequency: band-pass filter</li>
+
+                <li>Low Frequency > High frequency: band-stop filter</li>
+
+                <li>Low Frequency is not None and High frequency is None: high-pass filter</li>
+
+                <li>Low Frequency is None and High frequency is not None: low-pass filter</li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+
+{% endblock content%}

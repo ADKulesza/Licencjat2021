@@ -1,0 +1,50 @@
+{% extends "home_menu/essential.html" %}
+{% block navbars %}
+<div class="container">
+    <nav class="sidenav">
+        <a href="{% url 'home-menu' %}" class="home-header">Home</a>
+        <a href="{% url 'create_dataset' %}">Create dataset</a>
+        <a href="{% url 'upload_dataset' %}">Upload EEGLAB Data</a>
+        <a href="{% url 'download_dataset' %}">Download EEGLAB Data</a>
+        <a href="#">Articles</a>
+    </nav>
+</div>
+
+
+<div class="main">
+    <div class="row border-bottom">
+        <div class="col">
+            <h1>EEG Builder</h1>
+
+        </div>
+
+        <div class="col text-right">
+            <div class="dropdown">
+                <button class="btn btn-xl bg-transparent oi oi-menu dropdown"
+                        type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    {% if user.is_authenticated %}
+                    <a class="dropdown-item" href="{% url 'profile' %}">Profile</a>
+                    <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+                    {% else %}
+                    <a class="dropdown-item" href="{% url 'login' %}">Login</a>
+                    <a class="dropdown-item" href="{% url 'register' %}">Register</a>
+                    {% endif %}
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    {% block content %}
+    {% endblock %}
+
+
+</div>
+{% endblock %}
+
+

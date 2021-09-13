@@ -1,0 +1,27 @@
+{% extends "home_menu/base.html" %}
+{% block content %}
+<h2>Download dataset!</h2>
+
+<div style="width: 65%;">
+    <div id="profile-settbox">
+        <ul class="nav flex-column">
+
+            {% for sett in eeglab_data %}
+            <li>
+                <label for="{{ sett.id }}">{{ sett.name }}</label>
+                <input class="jq-radio-input" type="radio" name="radio" id="{{ sett.id }}"
+                       onchange="downloadZip(this, {{ sett.id }})">
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+
+    <div id="download-display" style="display:none">
+
+        <a class="btn btn-success" id="download-data" href="#">Download</a>
+
+    </div>
+
+</div>
+{% endblock content%}

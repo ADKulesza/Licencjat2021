@@ -1,0 +1,32 @@
+{% extends "home_menu/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<h2>Upload dataset!</h2>
+
+<div>
+
+
+    <legend class="border-bottom mb-4">Experimental data settings</legend>
+    <form method="POST">
+        {% csrf_token %}
+        <fieldset class="form-group" style="width: 65%;">
+
+            {{ upload_form|crispy }}
+
+
+        </fieldset>
+
+
+        <div class="form-group">
+            <button class="btn btn-outline-info" type="submit">Submit and go Next</button>
+        </div>
+        <!--                Extra files?-->
+    </form>
+
+</div>
+</div>
+
+<hr>
+
+
+{% endblock content%}

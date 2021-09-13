@@ -1,0 +1,54 @@
+{% extends "home_menu/base.html" %}
+{% block content %}
+<h2>Confirmation</h2>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            .fdt files
+        </div>
+        <div class="col-sm">
+            .set files
+        </div>
+        <div class="col-sm">
+            <input type="radio" class="form-check-input" id="confirm-upload">Confirm data</input>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm">
+            <ul style="list-style-type:none;">
+                {% for fdt_f in fdt_files %}
+                <li>{{ fdt_f }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="col-sm">
+            <ul style="list-style-type:none;">
+                {% for set_f in set_files %}
+                <li>{{ set_f }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="col-sm">
+            <!--            style="display:none"-->
+            <div id="confirm-upload-data-list">
+                <ul style="list-style-type:none;">
+                    {% for file in files %}
+                    <li>
+                        <label for="{{ file.name }}">{{ file.name }}</label>
+                        <input type="checkbox" name="file[]" id="{{ file.name }}" value="{{ file.anme }}">
+                    </li>
+
+                    {% endfor %}
+                </ul>
+                <a href="{% url 'profile' %}">Save</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock content%}

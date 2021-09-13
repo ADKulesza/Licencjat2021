@@ -1,0 +1,34 @@
+{% extends "home_menu/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <fieldset class="form-group">
+        <legend class="border-bottom mb-4">Upload .set and .fdt files</legend>
+        {{ form|crispy }}
+
+        <div style="font-size:13px">
+        To avoid data problems, make sure that:
+        <br>
+        <ul class="nav flex-column" style="list-style-type: circle;">
+
+            <li style="margin-left: 22px;">
+                Number of .set and .fdt files are equal
+            </li>
+            <li style="margin-left: 22px;">
+                The number of files pairs is equal to the number of number of participants
+            </li>
+
+        </ul>
+            </div>
+    </fieldset>
+    <div class="form-group">
+
+        <a href="{% url 'profile' %}">Back</a>
+        <button class="btn btn-outline-info" type="submit">Update</button>
+    </div>
+</form>
+
+
+{% endblock content%}

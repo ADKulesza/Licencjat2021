@@ -1,0 +1,95 @@
+{% extends "home_menu/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+
+<div class="container">
+    <div class="row">
+        <p style="font-size:25px"><b>Name:</b> {{ settings.name }}</p>
+    </div>
+    <div class="row">
+        <div class="col-sm">
+            <div class="row">
+                <b>Experiment type:</b> {{ settings.exp_type }}
+            </div>
+
+            <div class="row">
+                <b>Age Range:</b> {{ settings.age1 }} - {{ settings.age2 }}
+            </div>
+            <div class="row">
+                <b>Gender:</b> {{ settings.gender }}
+            </div>
+
+            <div class="row">
+                <b>Date Range:</b> {{ settings.exp_date1 }} - {{ settings.exp_date1 }}
+            </div>
+
+        </div>
+        <div class="col-sm">
+            <div class="row">
+                <b>Words:</b>
+
+                <ul class="nav flex-column">
+                    {% for option in settings.words_cat %}
+                    <li>
+                        {{ option }}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="row">
+                <b>Duration epoch time: </b> {{ settings.event_tmin }} - {{ settings.event_tmax }}
+            </div>
+
+            <div class="row">
+                <b>Baseline range: </b> {{ settings.baseline_tmin }} - {{ settings.baseline_tmax }}
+            </div>
+
+            <div class="row">
+                <b>Heartbeat Artifacts: </b> {{ settings.heartbeat_artifacts }}
+            </div>
+
+            <div class="row">
+                <b>Ocular Artifacts: </b> {{ settings.ocular_artifacts }}
+            </div>
+
+            <div class="row">
+                <b>Channels: </b> {{ settings.channels_list }}
+            </div>
+
+        </div>
+        <div class="col-sm">
+            <div class="row">
+                <b>Filters: </b>
+
+                <ul class="nav flex-column">
+                    <br>
+                    {% for filter in filters %}
+                    <li>
+                        <i>band-pass</i>
+                        <br>
+                        freq.: <i>{{ filter.low_freq }} - {{ filter.high_freq }}</i>
+                        <br>
+                        order: <i>{{ filter.order }}</i>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<ul class="nav flex-column" style="margin-top: 45px;">
+    <li>
+        <a class="btn btn-success" style="margin-bottom: 10px;"
+           href="/build_dataset/{{ settings.id }}">Build Set</a>
+    </li>
+    <li>
+        <a class="btn btn-danger" href="/delete_dataset/{{ settings.id }}">Delete</a>
+    </li>
+</ul>
+
+
+{% endblock content%}

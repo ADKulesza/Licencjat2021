@@ -1,0 +1,127 @@
+{% extends "home_menu/base.html" %}
+
+{% load crispy_forms_tags %}
+{% block content %}
+<form method="POST">
+    {% csrf_token %}
+
+    <div id="dialog" title="Select words categories">
+        <fieldset>
+            <div class="dialog-content" id="dialogContent1">
+
+                {% for cat in cat_list %}
+
+                <input class="jq-checkbox-input" type="checkbox" name="catCheck"
+                       value="{{ cat }}" id="{{ cat }}" onchange="checkboxListing(this, {{ cat }}, 'cat-selector')">
+                <label for="{{ cat }}">{{ cat }}</label>
+                {% endfor %}
+            </div>
+
+            <div class="dialog-content" id="dialogContent2">
+                {% for word in words_list %}
+                <label for="{{ word }}">{{ word }}</label>
+                <input class="jq-checkbox-input" type="checkbox" name="wordsCheck"
+                       value="{{ word }}" id="{{ word }}"
+                       onchange="checkboxListing(this, {{ word }}, 'words-selector')">
+                {% endfor %}
+
+
+            </div>
+
+        </fieldset>
+
+    </div>
+
+
+    <div class="row d-flex justify-content-around">
+        <div class="column" style="padding: 1% 2.5%;">
+            <fieldset>
+                <legend>Words Selection</legend>
+                <ul class="nav flex-column">
+                    <li>
+                        <label for="allWords">All Words</label>
+                        <input class="jq-radio-input" type="radio" name="radio-1" id="allWords">
+                    </li>
+                    <li>
+                        <label for="speCat">Select Specific Categories</label>
+                        <button class="btn-invisible" id="openerSpeCat">
+                            <input class="jq-radio-input" type="radio" name="radio-1" id="speCat">
+                        </button>
+                    </li>
+                    <li>
+                        <label for="speWords">Select Specific Words</label>
+                        <button class="btn-invisible" id="openerSpeWords">
+                            <input class="jq-radio-input" type="radio" name="radio-1" id="speWords">
+                        </button>
+                    </li>
+                </ul>
+            </fieldset>
+            <input name="cat_selector" id="cat-selector" value="" style="display:none">
+            <input name="words_selector" id="words-selector" value="" style="display:none">
+        </div>
+        <div class="column" style="padding: 1% 2.5%;">
+            <fieldset>
+                <legend>Epochs Properties</legend>
+                <div>Duration epoch time</div>
+                <div class="controlgroup-vertical">
+                    <label for="eventTmin" class="ui-controlgroup-label">Before Event [s]</label>
+                    <input id="eventTmin" class="ui-spinner-input">
+                </div>
+                <div class="controlgroup-vertical">
+                    <label for="eventTmax" class="ui-controlgroup-label">After Event [s]</label>
+                    <input id="eventTmax" class="ui-spinner-input">
+                </div>
+
+                <!-- Baseline slider-->
+                <p style="margin-top: 25px;">
+                    <label for="baseline-amount">Baseline Range [s]:</label>
+                    <input type="text" id="baseline-amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+                </p>
+
+
+                <div id="slider-range-baseline"></div>
+
+            </fieldset>
+
+        </div>
+        <div class="column" style="padding: 1% 2.5%;">
+            <fieldset>
+                <legend>Artifacts</legend>
+                {{ event_form|crispy }}
+            </fieldset>
+
+        </div>
+    </div>
+    <br/>
+    <div class="row justify-content-center">
+        <div class="column" style="padding: 1% 2.5%;">
+            <fieldset>
+                <legend>Channels</legend>
+                <div id="channels-select-list">
+                    <label for="select-all">All</label>
+                    <input type="checkbox" id="select-all">
+                    {% for channel in channel_list %}
+                    <label for="{{ channel }}">{{ channel }}</label>
+                    <input type="checkbox" name="channels_list" id="{{ channel }}"
+                           onchange="checkboxListing(this, {{ channel }}, 'ch-list')">
+                    {% endfor %}
+                    <input name="ch_list" id="ch-list" value="" style="display:none">
+                </div>
+            </fieldset>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="column submit-form">
+            <div class="form-group">
+                <a href="{% url 'create-dataset-page1' %}">Back</a>
+                <button class="btn btn-outline-info" type="submit">Next</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+{% endblock content%}
+
+
